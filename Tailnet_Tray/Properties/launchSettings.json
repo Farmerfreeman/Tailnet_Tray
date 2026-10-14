@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Tailnet_Tray (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Tailnet_Tray (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
