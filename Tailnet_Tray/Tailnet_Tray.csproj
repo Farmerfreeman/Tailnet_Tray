@@ -43,7 +43,7 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\Tailnet_Library\Tailnet_Library.csproj" />
   </ItemGroup>
 
   <!--

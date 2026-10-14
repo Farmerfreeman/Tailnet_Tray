@@ -4,6 +4,12 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="Tailnet_Library/Tailnet_Library.csproj">
+    <Platform Solution="Debug|x64" Project="x64" />
+  </Project>
+  <Project Path="Tailnet_Test/Tailnet_Test.csproj">
+    <Platform Solution="Debug|x64" Project="x64" />
+  </Project>
   <Project Path="Tailnet_Tray/Tailnet_Tray.csproj">
     <Platform Solution="*|ARM64" Project="ARM64" />
     <Platform Solution="*|x64" Project="x64" />

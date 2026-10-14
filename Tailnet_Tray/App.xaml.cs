@@ -16,6 +16,9 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Microsoft.Extensions.DependencyInjection;
+using Tailnet_Library.Services;
+using Tailnet_Library.Services.Interfaces;
+using Tailnet_Library.ViewModels;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,6 +31,9 @@ namespace Tailnet_Tray
     public partial class App : Application
     {
         private Window? _window;
+
+
+        public static IServiceProvider Services { get; private set; } = ConfigureServices();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -44,8 +50,19 @@ namespace Tailnet_Tray
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
+            _window = Services.GetRequiredService<MainWindow>();
             _window.Activate();
+        }
+
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            //Register TailScaleService as a singleton
+            services.AddSingleton<ITailscaleService, TailscaleService>();
+            services.AddTransient<MainViewModel>();
+            services.AddTransient<MainWindow>();
+            return services.BuildServiceProvider();
         }
     }
 }

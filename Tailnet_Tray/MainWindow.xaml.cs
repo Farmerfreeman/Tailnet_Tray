@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Tailnet_Library.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -23,9 +24,17 @@ namespace Tailnet_Tray
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public MainWindow()
+
+        public MainViewModel ViewModel { get; }
+        public MainWindow(MainViewModel viewModel)
         {
+            ViewModel = viewModel;
             InitializeComponent();
+        }
+
+        private async void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.RefreshStatusCommand.ExecuteAsync(null);
         }
     }
 }

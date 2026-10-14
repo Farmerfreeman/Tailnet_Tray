@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Tailnet_Tray"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Tailnet_Library.Models="using:Tailnet_Library.Models"
     mc:Ignorable="d"
     Title="Tailnet_Tray">
 
@@ -13,7 +13,27 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid>
+    <Grid Padding="16" RowSpacing="12" Loaded="Grid_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal" Spacing="12">
+            <TextBlock Text="{x:Bind ViewModel.ConnectionState, Mode=OneWay}"
+                       VerticalAlignment="Center" FontSize="18" />
+            <Button Content="Refresh" Command="{x:Bind ViewModel.RefreshStatusCommand}" />
+        </StackPanel>
+
+        <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.Devices}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="Tailnet_Library.Models:TailscalePeer">
+                    <StackPanel Padding="0,6">
+                        <TextBlock Text="{x:Bind HostName}" FontWeight="SemiBold" />
+                        <TextBlock Text="{x:Bind OS}" Opacity="0.7" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>
